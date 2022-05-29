@@ -4,7 +4,7 @@ import { apiData } from "../models/offers.model";
 export const offersApi = createApi({
   reducerPath: "offersApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://cdn.sixt.io/codingtask/offers.json",
+    baseUrl: "https://cdn.sixt.io/codingtask/offers.json",
   }),
   endpoints: (builder) => ({
     offers: builder.query<apiData, void>({
