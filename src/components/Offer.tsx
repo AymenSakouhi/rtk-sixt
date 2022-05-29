@@ -8,7 +8,7 @@ offer: offer
 
 const Offer: React.FC<Props> = ({ offer }) => {
   return (
-    <>
+    <div data-testid='card'>
       <Card>
         <Card.Img
           variant="top"
@@ -32,7 +32,7 @@ const Offer: React.FC<Props> = ({ offer }) => {
           </Button>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 };
 

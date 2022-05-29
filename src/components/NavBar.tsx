@@ -8,7 +8,7 @@ const NavBar = () => {
     <Container>
       <Navbar.Brand href="">
         <img
-          alt=""
+          alt="logo"
           src={mainLogo}
           width=""
           height="40"
