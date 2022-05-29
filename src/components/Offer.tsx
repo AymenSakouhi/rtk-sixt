@@ -10,7 +10,7 @@ const Offer: React.FC<Props> = ({ offer }) => {
   return (
     <div data-testid='card'>
       <Card>
-        <Card.Img
+        <Card.Img data-testid='image'
           variant="top"
           src={offer.carGroupInfo.modelExample.imageUrl} // Change the value to "" empty string for a demonstration
           onError={({ currentTarget }) => {
@@ -19,11 +19,12 @@ const Offer: React.FC<Props> = ({ offer }) => {
           }}
         />
         <Card.Body>
-          <Card.Title>{offer.carGroupInfo.modelExample.name}</Card.Title>
+          <Card.Title data-testid='title'>{offer.carGroupInfo.modelExample.name}</Card.Title>
           <Card.Text>
             {`Rent price per day: ${offer.prices.basePrice.amount.value} ${offer.prices.basePrice.amount.currency}`}
           </Card.Text>
           <Button
+            data-testid='button'
             href={`https://www.google.com/search?q=Sixt+Munich+${offer.carGroupInfo.modelExample.name}`}
             variant="primary"
             target="_blank"

@@ -21,20 +21,33 @@ let offer = {
       }
     }
 }
+const setup = async () => await render(<Offer offer={offer}/>);
 
 
 it("Offer component renders without crashing", () => {
-   render(
-    <Offer offer={offer} />
-  );
+  setup();
   expect(screen.getByText("Test Model FireFly")).toBeInTheDocument();
 });
 
-it("Offer component has an image", () => {
-
-  const { getByTestId } = render(
-    <Offer offer={offer} />
-  );
-
-  expect(getByTestId('card'));
+it("Offer card is available", () => {
+  setup();
+  expect(screen.getByTestId('card')).toBeTruthy();
 });
+
+it("Offer card has a title", () => {
+  setup();
+  expect(screen.getByTestId('title')).toBeDefined();;
+});
+
+
+
+it("Offer component has an image source", () => {
+   setup();
+   const displayedImage = document.querySelector("img") as HTMLImageElement;
+   expect(displayedImage.src).not.toBe("");
+  });
+
+  it("Offer card has a button", () => {
+    setup();
+    expect(screen.getByTestId('card')).toBeDefined();
+  });

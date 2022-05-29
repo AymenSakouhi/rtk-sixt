@@ -5,7 +5,7 @@ import App from "../App";
 
 
 
-it("at least a button should be displayed in the app", () => {
+it("The App does work with fetching data correctly", () => {
 
    render(
     <Provider store={store}>

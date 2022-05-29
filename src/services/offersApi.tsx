@@ -10,7 +10,7 @@ export const offersApi = createApi({
     offers: builder.query<apiData, void>({
       query: () => "",
     }),
-  }),
+  })
 });
 
 export const { useOffersQuery } = offersApi;
