@@ -1,46 +1,55 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+# Sixt Coding Challenge
 
-## Available Scripts
+The app link to check is: https://sixt-challenge.herokuapp.com/ 
 
-In the project directory, you can run:
+I used : Redux toolkit to fetch data from the json endpoint.
 
-### `npm start`
+For the grid system and UI/UX, I used react-bootstrap as a framework to illustrate the offers in a grid of 3s(Desktop) and 1s (Mobile).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I also used Typescript for modeling all the data object to be used in the app.
+For example any card that you see in the UI is actually coming from an object called offer which is passed as a key on the JSX Offer component.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![app image](https://i.imgur.com/fJM9JUZ.png)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- In case of no image in the card. I will summon a default one and you will find that in more details in the Offer component, under the components folder. Or as illustraded below in code itself:
+```
+<Card.Img data-testid='image'
+          variant="top"
+          src={offer.carGroupInfo.modelExample.imageUrl} // Change the value to "" empty string for a demonstration
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src = carReplacementImage;
+          }}
+        />
+```
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- I used some error handlings in the App.tsx main component as shown below: 
+```
+return (
+    <div className="App">
+      <NavBar />
+      <h1>Below are the list of offers</h1>
+      {isLoading && <h2>...Loading</h2>}
+      {isFetching && <h2>Something is wrong!!!</h2>}
+      {error && <h2>Something is wrong!!!</h2>}
+      {/* For most queries, it's usually sufficient to check for the isLoading state, then the isError state, then finally, assume that the data is available and render the successful state: */}
+      {isSuccess && (
+        <div>
+          <Offers data={data} />
+        </div>
+      )}
+    </div>
+  );
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+And also you will find some unit testing in the folder: __test__ as an example: testing the existance of an image in the offer card here: 
+```
+it("Offer component has an image source", () => {
+   setup();
+   const displayedImage = document.querySelector("img") as HTMLImageElement;
+   expect(displayedImage.src).not.toBe("");
+  });
+```
